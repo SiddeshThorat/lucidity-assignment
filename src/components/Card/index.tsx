@@ -2,6 +2,7 @@ import { useSelector } from "react-redux"
 import { IAppState } from "../../store.type"
 import { useMemo } from "react"
 import { CartIcon } from "../Icons"
+import { getSummaryData } from "../../utils/utils"
 
 const CardsComponent = () => {
   const { summary } = useSelector((app: IAppState) => app.Dashboard)

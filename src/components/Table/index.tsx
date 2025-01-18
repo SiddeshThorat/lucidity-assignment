@@ -10,7 +10,7 @@ import Row from "./Row"
 
 const ActionComponent = ({ index }: { index: number }) => {
   const dispatch = useDispatch()
-  const { data, isAdmin, summary } = useSelector((app: IAppState) => app.Dashboard)
+  const { data, isAdmin } = useSelector((app: IAppState) => app.Dashboard)
   const handleDelete = (i: number) => {
     if (!isAdmin || data[index].isDisabled) return
     const updatedData = [...data]
@@ -28,7 +28,8 @@ const ActionComponent = ({ index }: { index: number }) => {
   const handleEyeClick = (i: number) => {
     const updatedData = [...data]
     updatedData[i] = { ...updatedData[i], isDisabled: !updatedData[i].isDisabled }
-    dispatch(setData({ data: updatedData, summary  }))
+    const updatedSummary = getSummaryData(updatedData)
+    dispatch(setData({ data: updatedData, summary: updatedSummary  }))
   }
 
   return (
@@ -76,7 +77,7 @@ const Table = () => {
             name={rowData.name}
             category={rowData.category}
             price={`$${rowData.price}`}
-            quantity={`$${rowData.quantity}`}
+            quantity={`${rowData.quantity}`}
             value={`$${rowData.value}`}
             action={rowData.actionComponent}
             isDisabled={rowData.isDisabled || !isAdmin}

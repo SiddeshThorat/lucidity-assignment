@@ -1,8 +1,9 @@
 import { IDashboardState } from "../reducers/dashboardReducer/type"
 
-export const getSummaryData = (data: IDashboardState['data']): IDashboardState['summary'] => {
-   const uniqueCategories: any = {}
-  return data.reduce((obj, curr) => {
+export const getSummaryData = (data: IDashboardState['data']) => {
+  const uniqueCategories: any = {}
+  const filteredDisabledProduct = data.filter((d) => !d.isDisabled)
+  return filteredDisabledProduct.reduce((obj, curr) => {
     let localCategoryCount = obj.noOfCategory
     if (!uniqueCategories[curr.category]) {
       uniqueCategories[curr.category] = true
