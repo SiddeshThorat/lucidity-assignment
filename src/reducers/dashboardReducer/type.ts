@@ -15,7 +15,7 @@ export type IDashboardState = {
   }
 }
 
-type TableData = {
+export type TableData = {
   isDisabled: boolean
   name: string
   category: string
